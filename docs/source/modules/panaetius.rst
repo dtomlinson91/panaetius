@@ -1,8 +1,8 @@
 .. include:: ../global.rst
 
-panaetius :modname:`panaetius`
--------------------------------------
-
+*********
+panaetius
+*********
 
 API
 ===
@@ -17,7 +17,7 @@ The following is availble by importing the module:
 panaetius.CONFIG
 ----------------
 
-``panaetius.CONFIG`` provides an instance of :class:`panaetius,config.Config`
+``panaetius.CONFIG`` provides an instance of :class:`panaetius.config.Config`
 
 
 panaetius.set_config()
@@ -39,10 +39,14 @@ Conveniently provides access to all attributes that have been declared with :fun
 
 .. code-block:: python
 
-    panaetius.CONFIG.aws_secret_key
+    my_secret_key = panaetius.CONFIG.aws_secret_key
 
 
 panaetius.logger
 -----------------
 
 ``panaetius.logger`` provides a logger instance already formatted with a nice json output.
+
+.. code-block:: python
+
+    panaetius.logger.info('some logging message')
