@@ -39,6 +39,13 @@ class Mask:
 
     @property
     def hash(self):
+        """Property to determine the hash of a config entry.
+
+        Returns
+        -------
+        bytes
+            The hash as a bytes object.
+        """
         try:
             if not self._hash_exists:
                 pass
@@ -56,6 +63,13 @@ class Mask:
 
     @property
     def salt(self):
+        """Property to detemine a random salt to use in creation of the hash.
+
+        Returns
+        -------
+        bytes
+            The salt as a bytes object.
+        """
         self._salt = urandom(32)
         return self._salt
 
