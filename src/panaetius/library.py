@@ -58,12 +58,12 @@ def set_config(
 
         Example:
 
-        `config.toml` has the following attribute set::
+        *config.toml* has the following attribute set::
             [package.users]
             auth = ['user1', 'user2']
 
         If set as an environment variable you can pass this list as a string
-        and set check=list::
+        and set :code:`check=list`::
 
             Environment variable:
             PACKAGE_USERS_AUTH = "['user1', 'user2']"
