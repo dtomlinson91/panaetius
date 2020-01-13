@@ -41,7 +41,7 @@ From pypi using pip
 From local wheel
 ~~~~~~~~~~~~~~~~~
 
-Download the latest verion from the `releases`_ page:
+Download the latest verion from the `releases`_ page.
 
 .. _releases: https://github.com/dtomlinson91/panaetius/releases
 
