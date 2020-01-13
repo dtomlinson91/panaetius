@@ -17,7 +17,7 @@ The following is availble by importing the module:
 panaetius.CONFIG
 ----------------
 
-``panaetius.CONFIG`` provides an instance of :class:`panaetius.config.Config`
+:obj:`panaetius.CONFIG` provides an instance of :class:`panaetius.config.Config`
 
 
 panaetius.set_config()
@@ -45,8 +45,22 @@ Conveniently provides access to all attributes that have been declared with :fun
 panaetius.logger
 -----------------
 
-``panaetius.logger`` provides a logger instance already formatted with a nice json output.
+:obj:`panaetius.logger` provides a logger instance already formatted with a nice json output.
 
 .. code-block:: python
 
     panaetius.logger.info('some logging message')
+
+This gives a logger output of:
+
+.. code-block:: json
+
+    {
+        "time": "2020-01-13 23:07:17,913",
+        "file_name": "test.py",
+        "module": "test",
+        "function":"<module>",
+        "line_number": "33",
+        "logging_level":"INFO",
+        "message": "some logging message"
+    }
