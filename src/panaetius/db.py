@@ -75,10 +75,34 @@ class Mask:
 
     @staticmethod
     def as_string(obj: bytes) -> str:
+        """Static method to return a string from a bytes object.
+
+        Parameters
+        ----------
+        obj : bytes
+            Bytes object to be converted to a string.
+
+        Returns
+        -------
+        str
+            The bytes object as a string.
+        """
         return bytes.hex(obj)
 
     @staticmethod
     def fromhex(obj: str) -> bytes:
+        """Static method to create a bytes object from a string.
+
+        Parameters
+        ----------
+        obj : str
+            String object to be converted to bytes.
+
+        Returns
+        -------
+        bytes
+            The string object as bytes.
+        """
         return bytes.fromhex(obj)
 
     @staticmethod
