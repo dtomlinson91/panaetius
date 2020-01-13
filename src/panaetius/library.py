@@ -58,22 +58,19 @@ def set_config(
 
         Example:
 
-        `config.toml` has the following attribute set:
-        ```
+        `config.toml` has the following attribute set::
             [package.users]
             auth = ['user1', 'user2']
-        ```
 
         If set as an environment variable you can pass this list as a string
-        and set check=list:
+        and set check=list::
 
-        Environment variable:
-        PACKAGE_USERS_AUTH = "['user1', 'user2']"
+            Environment variable:
+            PACKAGE_USERS_AUTH = "['user1', 'user2']"
 
-        Usage in code:
-        ```python
-        set_config(CONFIG, 'users.auth', check=list)
-        ```
+        Usage in code::
+
+            set_config(CONFIG, 'users.auth', check=list)
     """
     config_var = key.lower().replace('.', '_')
     if check is None:
