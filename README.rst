@@ -24,23 +24,37 @@ Read the documentation on `read the docs`_.
 Installation
 ==============
 
-You can install ..:obj:`panaetius`
-
-Easy Way
-=========
+You can install ``panaetius`` the following ways:
 
 Python
 -------
 
-From pip
-~~~~~~~~~
+Install into a virtual environment.
+
+From pypi using pip
+~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    pip install panaetius
 
 From local wheel
 ~~~~~~~~~~~~~~~~~
 
+Download the latest verion from the `releases`_ page:
+
+.. _releases: https://github.com/dtomlinson91/panaetius/releases
+
+Install with pip:
+
+.. code-block:: bash
+    pip install -U panaetius-1.0.2-py3-none-any.whl
+
+
 From source
 ~~~~~~~~~~~~
 
-Example Usage
-==============
+Clone the repo and install using ``setup.py``:
 
+.. code-block:: bash
+    python setup.py
