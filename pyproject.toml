@@ -7,7 +7,7 @@ authors = ["dtomlinson <dtomlinson@panaetius.co.uk>"]
 readme = "/Users/dtomlinson/git-repos/projects/panaetius/README.md"
 homepage = "https://github.com/dtomlinson91/panaetius"
 repository = "https://github.com/dtomlinson91/panaetius"
-documentation = "https://github.com/dtomlinson91/panaetius"
+documentation = "https://panaetius.readthedocs.io/en/latest/introduction.html"
 classifiers = [
     "Environment :: Plugins",
     "Intended Audience :: Developers",

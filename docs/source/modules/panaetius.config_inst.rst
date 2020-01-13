@@ -1,6 +1,6 @@
 .. include:: ../global.rst
 
-Config :modname:`panaetius.config_inst`
+panaetius.config_inst :modname:`panaetius.config_inst`
 ---------------------------------------
 
 .. automodule:: panaetius.config_inst
