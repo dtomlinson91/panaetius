@@ -11,14 +11,16 @@ try:
     __spec.loader.exec_module(__header__)
     __header__ = __header__.__header__
 except FileNotFoundError:
-    venv = os.environ.get('VIRTUAL_ENV').split('/')[-1]
-    if venv is not None:
+    try:
+        venv = os.environ.get('VIRTUAL_ENV').split('/')[-1]
         __header__ = venv
-    else:
-        raise FileNotFoundError(
+    except AttributeError:
+        print(
             f'Cannot find a __header__.py file in {os.getcwd()} containing the'
             ' __header__ value of your project name and you are not working'
             ' from a virtual environment. Either make sure this file '
             'exists and the value is set or create and work from a virtual '
-            'environment and try again.'
+            'environment and try again. \n The __header__ value has been '
+            'set to the default of panaetius.'
         )
+        __header__ = 'panaetius'
