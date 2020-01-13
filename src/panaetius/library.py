@@ -59,6 +59,7 @@ def set_config(
         Example:
 
         *config.toml* has the following attribute set::
+
             [package.users]
             auth = ['user1', 'user2']
 
