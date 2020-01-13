@@ -38,6 +38,8 @@ Pyflakes = "^2.1"
 Rope = "^0.16.0"
 python-language-server = "^0.31.4"
 pycodestyle = "^2.5"
+sphinx = "^2.3"
+sphinx_rtd_theme = "^0.4.3"
 
 [build-system]
 requires = ["poetry>=0.12"]
