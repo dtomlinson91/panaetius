@@ -11,6 +11,32 @@ import panaetius
 
 
 class Mask:
+
+    """Class to handle masking sensitive values in a config file
+
+    Attributes
+    ----------
+    config_contents : dict
+        A dict containing the contents of the config file.
+    config_path : str
+        The path to the config file.
+    config_var : str
+        The key corresponding to the config entry.
+    database : Pylite
+        A Pylite instance for the datbase.
+    entry : str
+        The result from the config file. Could either be a hash or the raw
+        value.
+    header : str
+        The __header__ which denotes where the config file is stored.
+    name : str
+        The key of the entry in the config file.
+    result : str
+        The value of the entry in the config file.
+    table_name : str
+        The sqlite table name. Defaults to the __header__ value.
+    """
+
     @property
     def hash(self):
         try:
@@ -53,6 +79,9 @@ class Mask:
     def __init__(
         self, config_path: str, config_contents: dict, config_var: str
     ):
+        """Summary
+        See :class:`~Mask` for parameters.
+        """
         self.table: str = __header__
         self.config_path = config_path
         self.config_contents = config_contents
@@ -114,34 +143,34 @@ class Mask:
             self.entry[self.name],
         )
 
-    def update_entries_in_db(self):
+    def _update_entries_in_db(self):
         self.database.remove(self.table, f'Name="{self.config_var}"')
         self._insert_entries()
 
-    def run_query(self, query: str):
+    def _run_query(self, query: str):
         cur = self.database.db.cursor()
         cur.execute(query)
         self.database.db.commit()
         self.result = cur.fetchall()
         return self
 
-    def get_all_items(self, where_clause: str = None):
+    def _get_all_items(self, where_clause: str = None):
         if where_clause is not None:
             self.result = self.database.get_items(self.table, where_clause)
         else:
             self.result = self.database.get_items(self.table)
         return self
 
-    def process(self):
+    def _process(self):
         if not self._check_entries():
             # panaetius.logger.debug('does not exist')
             self._insert_entries()
             self._update_entries_in_config()
-            self.get_all_items()
+            self._get_all_items()
             # panaetius.logger.debug(f'returning: {self.result[0][3]}')
             return self.entry[self.name]
         else:
-            self.get_all_items(f'Name="{self.config_var}"')
+            self._get_all_items(f'Name="{self.config_var}"')
             if self.result[0][1] == self.entry[self.name]:
                 # panaetius.logger.debug('exists and hash matches')
                 # panaetius.logger.debug(f'returning: {self.result[0][3]}')
@@ -151,9 +180,9 @@ class Mask:
                 # panaetius.logger.debug(
                 #     f'file_hash={self.entry[self.name]}, {self.result[0][1]}'
                 # )
-                self.update_entries_in_db()
+                self._update_entries_in_db()
                 self._update_entries_in_config()
-                self.get_all_items(f'Name="{self.config_var}"')
+                self._get_all_items(f'Name="{self.config_var}"')
                 # panaetius.logger.debug(f'returning: {self.result[0][3]}')
                 return self.entry[self.name]
 
@@ -173,9 +202,17 @@ class Mask:
         c.close()
 
     def get_value(self):
+        """Get the true value from the database if it exists, create if it'
+        ' doesn't exist or update if the hash has changed.
+
+        Returns
+        -------
+        str
+            The result from the database.
+        """
         # print(f'key in db {self.config_var}')
         self._get_database_file()
         self._open_database()
         self._get_table()
-        self.process()
+        self._process()
         return self.result[0][3]
