@@ -57,4 +57,5 @@ From source
 Clone the repo and install using ``setup.py``:
 
 .. code-block:: bash
+
     python setup.py
