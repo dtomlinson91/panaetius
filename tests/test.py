@@ -29,3 +29,5 @@ print(panaetius.CONFIG.config_file)
 
 # for i in panaetius.CONFIG.deferred_messages:
 #     panaetius.logger.debug(i)
+
+panaetius.logger.info('some logging message')

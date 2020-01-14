@@ -25,4 +25,3 @@
    modules/panaetius.header.rst
    modules/panaetius.library.rst
    modules/panaetius.logging.rst
-   modules/panaetius.rst

@@ -56,24 +56,22 @@ def set_config(
         to define a list, but want to make sure that a string representation
         of a list will be loaded properly if it set as an environment variable.
 
-    Example:
+        Example:
 
-    `config.toml` has the following attribute set:
-    ```
-        [package.users]
-        auth = ['user1', 'user2']
-    ```
+        *config.toml* has the following attribute set::
 
-    If set as an environment variable you can pass this list as a string
-    and set check=list:
+            [package.users]
+            auth = ['user1', 'user2']
 
-    Environment variable:
-    PACKAGE_USERS_AUTH = "['user1', 'user2']"
+        If set as an environment variable you can pass this list as a string
+        and set :code:`check=list`::
 
-    Usage in code:
-    ```python
-    set_config(CONFIG, 'users.auth', check=list)
-        ```
+            Environment variable:
+            PACKAGE_USERS_AUTH = "['user1', 'user2']"
+
+        Usage in code::
+
+            set_config(CONFIG, 'users.auth', check=list)
     """
     config_var = key.lower().replace('.', '_')
     if check is None:

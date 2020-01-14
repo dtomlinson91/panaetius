@@ -1,7 +1,7 @@
 .. include:: ../global.rst
 
-Config :modname:`panaetius.header`
--------------------------------------
+panaetius.header :modname:`panaetius.header`
+---------------------------------------------
 
 .. automodule:: panaetius.header
    :members:

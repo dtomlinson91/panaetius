@@ -1,6 +1,6 @@
 .. include:: ../global.rst
 
-Config :modname:`panaetius.db`
+panaetius.db :modname:`panaetius.db`
 -------------------------------------
 
 .. automodule:: panaetius.db

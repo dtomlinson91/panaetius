@@ -1,7 +1,7 @@
 .. include:: ../global.rst
 
-Config :modname:`panaetius.logging`
--------------------------------------
+panaetius.logging :modname:`panaetius.logging`
+----------------------------------------------
 
 .. automodule:: panaetius.logging
    :members:

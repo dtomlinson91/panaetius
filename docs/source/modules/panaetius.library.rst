@@ -1,7 +1,7 @@
 .. include:: ../global.rst
 
-Config :modname:`panaetius.library`
--------------------------------------
+panaetius.library :modname:`panaetius.library`
+------------------------------------------------
 
 .. automodule:: panaetius.library
    :members:
