@@ -64,6 +64,7 @@ You can overwrite the ``config.toml`` location by setting the environment variab
 
     DEFAULT_CONFIG_PATH = "~/path/to/config"
 
+
 Setting values in your code
 ############################
 
@@ -79,9 +80,9 @@ E.g your script could contain:
     import panaetius
     panaetius.set_config(panaetius.CONFIG, 'logging.path')
 
-    .. Note::
+.. Note::
 
-    The ``key`` attribute in :func:`panaetius.library.set_config` is specified as a string, with the hirearchy in the config file split with a ``.``.
+The ``key`` attribute in :func:`panaetius.library.set_config` is specified as a string, with the hirearchy in the config file split with a ``.``.
 
 .. Important::
 
