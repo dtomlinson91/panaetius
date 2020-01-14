@@ -82,7 +82,7 @@ E.g your script could contain:
 
 .. Note::
 
-The ``key`` attribute in :func:`panaetius.library.set_config` is specified as a string, with the hirearchy in the config file split with a ``.``.
+    The ``key`` attribute in :func:`panaetius.library.set_config` is specified as a string, with the hirearchy in the config file split with a ``.``.
 
 .. Important::
 
