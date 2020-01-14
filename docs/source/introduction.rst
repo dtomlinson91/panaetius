@@ -20,9 +20,9 @@ Usage
 Setting a config file
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This is the main functionality of ``panaetius``: using a config file to store variables.
+The main functionality of ``panaetius`` is using a config file to store variables.
 
-Your ``config.toml`` can be created and found in ~/.config/$__header__/config.toml where __header__ is equal to the variable configured/set. `See how to configure`_ this variable in the configuration section of panaetius.
+Your ``config.toml`` can be created and found in ~/.config/__header__/config.toml where __header__ is equal to the variable configured/set. `See how to configure`_ this variable in the configuration section of panaetius.
 
 .. _See how to configure: https://panaetius.readthedocs.io/en/latest/configuration.html#header-py
 
@@ -54,7 +54,6 @@ These are equivalent to the environment variables:
     EXAMPLE_MODULE_LOGGING_LEVEL
     EXAMPLE_MODULE_FOO_BAR
 
-Where the ``config.toml`` in this example would be located in the default
 
 .. Attention:: 
     Environment variables take precedent over the ``config.toml``. If both are set then the environment variable will be used.
@@ -62,15 +61,16 @@ Where the ``config.toml`` in this example would be located in the default
 You can overwrite the ``config.toml`` location by setting the environment variable:
 
 .. code-block:: bash
+
     DEFAULT_CONFIG_PATH = "~/path/to/config"
 
 Setting values in your code
 ############################
 
-Values in a ``config.toml`` or from an environment variable need to set in your work in order for you to use them. You can do this easily by
+Values in a ``config.toml`` or from an environment variable need to be set in your work in order for you to use them. You can do this easily by
 
-- importing panaetius
-- using the :func:`panaetius.library.set_config`
+- importing panaetius.
+- using the :func:`panaetius.library.set_config` function.
   
 E.g your script could contain:
 
@@ -78,6 +78,10 @@ E.g your script could contain:
 
     import panaetius
     panaetius.set_config(panaetius.CONFIG, 'logging.path')
+
+    .. Note::
+
+    The ``key`` attribute in :func:`panaetius.library.set_config` is specified as a string, with the hirearchy in the config file split with a ``.``.
 
 .. Important::
 
@@ -105,7 +109,10 @@ There are other options available for you to configure a logger. These are (incl
 
     [example_module.logging]
     backup_count = 3
-    format = "%(asctime)s - %(module)s:%(lineno)s - %(levelname)s - %(message)s"
+    format = "{\n\t"time": "%(asctime)s",\n\t"file_name": "%(filename)s",'
+    '\n\t"module": "%(module)s",\n\t"function":"%(funcName)s",\n\t'
+    '"line_number": "%(lineno)s",\n\t"logging_level":'
+    '"%(levelname)s",\n\t"message": "%(message)s"\n}"
     level = "INFO" # Level should be in CAPS
     rotate_bytes = 512000
 
