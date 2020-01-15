@@ -1,5 +1,5 @@
-panaetius
-==========
+Introduction
+=============
 
 .. image:: https://img.shields.io/readthedocs/panaetius?style=for-the-badge   :target: https://panaetius.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
