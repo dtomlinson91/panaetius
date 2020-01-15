@@ -71,7 +71,7 @@ Setting values in your code
 Values in a ``config.toml`` or from an environment variable need to be set in your work in order for you to use them. You can do this easily by
 
 - importing panaetius.
-- using the :func:`panaetius.library.set_config` function.
+- using the :func:`~panaetius.library.set_config` function.
   
 E.g your script could contain:
 
@@ -82,11 +82,11 @@ E.g your script could contain:
 
 .. Note::
 
-    The ``key`` attribute in :func:`panaetius.library.set_config` is specified as a string, with the hirearchy in the config file split with a ``.``.
+    The ``key`` attribute in :func:`~panaetius.library.set_config` is specified as a string, with the hirearchy in the config file split with a ``.``
 
 .. Important::
 
-    The default value for a variable defined using :func:`panaetius.library.set_config` is ``None``. See the documentation of this function to see all the options available.
+    The default value for a variable defined using :func:`~panaetius.library.set_config` is ``None``. See the documentation of this function to see all the options available.
 
 
 Accessing values
@@ -102,7 +102,7 @@ You can then access the result of this variable later in your code:
 Logging
 ~~~~~~~~
 
-In order to save to disk, you need to specify a path for the log file in the config file/environment variable. There is no need to register this with :func:`panaetius.library.set_config` as ``panaetius`` will do this automatically.
+In order to save to disk, you need to specify a path for the log file in the config file/environment variable. There is no need to register this with :func:`~panaetius.library.set_config` as ``panaetius`` will do this automatically.
 
 There are other options available for you to configure a logger. These are (including the default values which can be overwritten):
 

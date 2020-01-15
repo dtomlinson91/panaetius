@@ -29,7 +29,7 @@ You can install ``panaetius`` the following ways:
 Python
 -------
 
-Install into a virtual environment.
+.. Attention:: You should install in a python virtual environment
 
 From pypi using pip
 ~~~~~~~~~~~~~~~~~~~~
@@ -48,6 +48,7 @@ Download the latest verion from the `releases`_ page.
 Install with pip:
 
 .. code-block:: bash
+
     pip install -U panaetius-1.0.2-py3-none-any.whl
 
 
