@@ -16,7 +16,16 @@ E.g a ``__header__.py`` for the module ``plex_posters`` would look like:
 
     __header__ = 'plex_posters' 
 
-Your config file can then be created at ``~/.config/__header__/config.toml``. The headers of the toml file would look like:
+Your config file can then be created at ``~/.config/__header__/config.toml``. 
+
+Your environment variables can be created with:
+
+.. code-block:: bash
+
+    HEADER_FOO = "bar"
+    HEADER_SUBSECTION_FOO = "bar"
+
+The headers of the toml file would look like:
 
 .. code-block:: toml
 
