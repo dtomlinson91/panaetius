@@ -3,7 +3,7 @@ Configuration
 
 panaetius is fairly easy to configure. There are just a couple of options to be aware of.
 
-header.py
+__header__.py
 ----------
 
 You should set a ``__header__.py`` next to your script or module.
@@ -15,6 +15,25 @@ E.g a ``__header__.py`` for the module ``plex_posters`` would look like:
 .. code-block:: python
 
     __header__ = 'plex_posters' 
+
+Your config file can then be created at ``~/.config/__header__/config.toml``. 
+
+Your environment variables can be created with:
+
+.. code-block:: bash
+
+    HEADER_FOO = "bar"
+    HEADER_SUBSECTION_FOO = "bar"
+
+The headers of the toml file would look like:
+
+.. code-block:: toml
+
+    [__header__]
+    foo = bar
+
+    [__header__.subsection]
+    foo = bar
 
 If you are writing a script, simply place this ``__header__.py`` along side your script. Panaetius will pick this up when the script is ran.
 
