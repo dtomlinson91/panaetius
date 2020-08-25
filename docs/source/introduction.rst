@@ -22,7 +22,7 @@ Setting a config file
 
 The main functionality of ``panaetius`` is using a config file to store variables.
 
-Your ``config.toml`` can be created and found in ~/.config/__header__/config.toml where __header__ is equal to the variable configured/set. `See how to configure`_ this variable in the configuration section of panaetius.
+Your ``config.toml`` can be created and found in ``~/.config/__header__/config.toml`` where ``__header__`` is equal to the variable configured/set. `See how to configure`_ this variable in the configuration section of panaetius.
 
 .. _See how to configure: https://panaetius.readthedocs.io/en/latest/configuration.html#header-py
 
