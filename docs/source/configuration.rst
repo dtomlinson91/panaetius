@@ -3,8 +3,34 @@ Configuration
 
 panaetius is fairly easy to configure. There are just a couple of options to be aware of.
 
+Manual configuration of ``Config`` instance
+--------------------------------------------
+
+Configuring with a ``__header__.py`` is deprecated. Manually set this value.
+
+Use the following snippet to configure (in ``__init__.py``):
+
+.. code-block:: python
+
+    import panaetius
+    from panaetius.config import Config
+
+    CONFIG = Config(path="~/.config/island-code-extractor", header="island-code-extractor")
+
+    panaetius.set_config(CONFIG, "reddit.secret")
+
+Access this in your code by importing the ``CONFIG`` instance from your module:
+
+.. code-block:: python
+
+    from island_code_extractor import CONFIG
+    from island_code_extractor import panaetius
+
+    CONFIG.reddit_output_path
+    panaetius.logger.info("Using logger")
+
 __header__.py
-----------
+-------------
 
 You should set a ``__header__.py`` next to your script or module.
 

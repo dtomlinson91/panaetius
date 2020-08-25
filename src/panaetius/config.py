@@ -38,14 +38,15 @@ class Config:
         Path to config file
     """
 
-    def __init__(self, path: str) -> None:
+    def __init__(self, path: str, header: str = __header__) -> None:
         """
         See :class:`~panaetius.config.Config` for parameters.
         """
         self.path = os.path.expanduser(path)
+        self.header = header
         self.deferred_messages = []
         self.config_file = self.read_config(path)
-        self.module_name = __header__.lower()
+        self.module_name = self.header.lower()
         self.Mask = Mask
 
     def read_config(self, path: str, write: bool = False) -> Union[dict, None]:
@@ -55,6 +56,8 @@ class Config:
         ----------
         path : str
             Path to config file. Should not contain `config.toml`
+        header : str
+            Header to overwrite if using in a module.
 
             Example: ``path = '~/.config/panaetius'``
 
@@ -89,7 +92,6 @@ class Config:
                 return config_file
             except FileNotFoundError:
                 self.defer_log(f'Config file not found at {path}')
-                pass
         else:
             try:
                 with open(path, 'w+') as config_file:
@@ -98,7 +100,6 @@ class Config:
                 return config_file
             except FileNotFoundError:
                 self.defer_log(f'Config file not found at {path}')
-                pass
 
     def get(
         self,
@@ -130,7 +131,7 @@ class Config:
         Any
             Will return the config variable if found, or the default.
         """
-        env_key = f"{__header__.upper()}_{key.upper().replace('.', '_')}"
+        env_key = f"{self.header.upper()}_{key.upper().replace('.', '_')}"
 
         try:
             # look in the config.toml
@@ -149,10 +150,10 @@ class Config:
                     self.defer_log(f'{env_key} found in config.toml')
             else:
                 # print('valueerror')
-                # look under top level module __header__
+                # look under top level module self.header
                 # key = f'{self.module_name}.key'
                 if mask:
-                    # key = f'{__header__}.{key}'
+                    # key = f'{self.header}.{key}'
                     # print(f'mask key={key}')
                     value = self.Mask(
                         self.path, self.config_file, key
@@ -177,7 +178,7 @@ class Config:
             self.defer_log(f'{env_key} not found in config.toml')
 
         # look for an environment variable
-        value = os.environ.get(env_key)
+        value = os.environ.get(env_key.replace("-", "_"))
 
         if value is not None:
             self.defer_log(f'{env_key} found in an environment variable')
