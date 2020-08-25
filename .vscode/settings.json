@@ -2,5 +2,6 @@
     "python.linting.pylintEnabled": false,
     "python.linting.prospectorEnabled": true,
     "python.linting.enabled": true,
-    "python.pythonPath": ".venv/bin/python"
+    "python.pythonPath": ".venv/bin/python",
+    "restructuredtext.confPath": "${workspaceFolder}/docs/source"
 }
