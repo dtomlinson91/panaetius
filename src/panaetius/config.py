@@ -9,7 +9,6 @@ from panaetius.db import Mask
 # __all__ = ['Config']
 
 
-@export
 class Config:
 
     """Handles the config options for the module and stores config variables
@@ -52,34 +51,6 @@ class Config:
     def read_config(self, path: str, write: bool = False) -> Union[dict, None]:
         """Reads the toml config file from `path` if it exists.
 
-        Parameters
-        ----------
-        path : str
-            Path to config file. Should not contain `config.toml`
-        header : str
-            Header to overwrite if using in a module.
-
-            Example: ``path = '~/.config/panaetius'``
-
-        Returns
-        -------
-        Union[dict, None]
-            Returns a dict if the file is found else returns nothing.
-
-            The dict contains a key for each header. Each key corresponds to a
-            dictionary containing a key, value pair for each config under
-            that header.
-
-            Example::
-
-                [panaetius]
-
-                [panaetius.foo]
-                foo = bar
-
-            Returns a dict:
-
-                ``{'panaetius' : {foo: {'foo': 'bar'}}}``
         """
 
         path += 'config.toml' if path[-1] == '/' else '/config.toml'
