@@ -28,7 +28,6 @@ class Config:
             self._missing_config = True
             return {}
 
-    # TODO: fix the return error
     def get_value(
         self, key: str, default: Any, mask: bool, coerce: bool = False
     ) -> Any:
@@ -39,6 +38,12 @@ class Config:
             return self._get_config_value(env_key, key, default, mask, coerce)
         # no config file, look for env vars
         return self._get_env_value(env_key, default, coerce)
+
+    def _get_config_value_key_split_once(self):
+        pass
+
+    def _get_config_value_key_split_twice(self):
+        pass
 
     def _get_config_value(
         self, env_key: str, key: str, default: Any, mask: bool, coerce: bool = False

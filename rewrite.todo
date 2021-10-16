@@ -1,12 +1,16 @@
 Coding:
     No Config File:
-        ☐ Handle if a bool is passed in as a default
+        ✔ Handle if a bool is passed in as a default @done(21-10-16 05:25)
         needs to be lower case in the toml, need a check for this
 
     Config File:
-        ☐ Handle if a bool is passed in as a default
+        ✔ Handle if a bool is passed in as a default @done(21-10-16 05:25)
         needs to be lower case in the toml, need a check for this
 
+    Logging:
+        ☐ Create SimpleLogger, AdvancedLogger, CustomLogger classes
+        should simply have the different logging strings to output
+        should both specify whether to save to file or not
 
 Documentation:
     ☐ Rewrite documentation using `mkdocs` and using `.md`. @2h
