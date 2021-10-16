@@ -21,7 +21,6 @@ class Config:
     @property
     def config(self) -> dict[str, Any]:
         config_file_location = self.config_path / self.header_variable / "config.toml"
-        print(config_file_location)
         try:
             with open(config_file_location, "r", encoding="utf-8") as config_file:
                 return dict(toml.load(config_file))
@@ -30,7 +29,9 @@ class Config:
             return {}
 
     # TODO: fix the return error
-    def get_value(self, key: str, default: str | None, mask: bool) -> Any:
+    def get_value(
+        self, key: str, default: Any, mask: bool, coerce: bool = False
+    ) -> Any:
         env_key = f"{self.header_variable.upper()}_{key.upper().replace('.', '_')}"
 
         # look in the config file
@@ -52,21 +53,43 @@ class Config:
                         section, name = key.lower().split(".")
                         value = self.config[self.header_variable][section][name]
                 return value
-                # TODO: set a custom error and move this to the end to tell user that incorrect key was given and couldn't be found
-                # try:
-                #     return cast(value) if cast else value
-                # except UnboundLocalError:
-                #     # pass if nothing was found
-                #     pass
+
             except (KeyError, TypeError):
                 value = os.environ.get(env_key.replace("-", "_"))
                 if value is None:
-                    return toml.loads(default) if default is not None else None
-                return toml.loads(value)
+                    if isinstance(default, str):
+                        # if default is a string, wrap TOML value in quotes
+                        return toml.loads(f'value = "{default}"')["value"]
+                    # if default is not a string, leave TOML value as is
+                    return (
+                        toml.loads(f"value = {default}")["value"]
+                        if default is not None
+                        else None
+                    )
+                # if env var, coerce value if flag is set, else return a TOML string
+                return (
+                    toml.loads(f"value = {value}")["value"]
+                    if coerce
+                    else toml.loads(f'value = "{value}"')["value"]
+                )
+
         else:
             # look for an environment variable, fallback to default
             value = os.environ.get(env_key.replace("-", "_"))
             if value is None:
-                return toml.loads(default) if default is not None else None
-            return toml.loads(value)
-        return default
+                return (
+                    toml.loads(f'value = "{default}"')["value"]
+                    if default is not None
+                    else None
+                )
+            return toml.loads(f'value = "{value}"')["value"]
+
+    def _get_config_value(
+        self, key: str, default: Any, mask: bool, coerce: bool = False
+    ) -> Any:
+        pass
+
+    def _get_env_value(
+        self, key: str, default: Any, mask: bool, coerce: bool = False
+    ) -> Any:
+        pass
