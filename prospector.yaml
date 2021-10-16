@@ -11,10 +11,11 @@ pylint:
   disable:
     # disables TODO warnings
     - fixme
-    # !doc missing docstrings
+# !doc docstrings
     - missing-module-docstring
     - missing-class-docstring
     - missing-function-docstring
+# ! doc end of docstrings
     # disables warnings about abstract methods not overridden
     - abstract-method
     # used when an ancestor class method has an __init__ method which is not called by a derived class.
@@ -37,6 +38,7 @@ pylint:
     max-public-methods: 25
     max-module-lines: 1000
     max-line-length: 88
+    max-args: 8
 
 mccabe:
   run: true
@@ -63,7 +65,7 @@ pyroma:
 # http://www.pydocstyle.org/en/6.1.1/error_codes.html
 pep257:
   disable:
-    # !doc docstrings
+# !doc docstrings
     # Missing docstring in __init__
     - D107
     # Missing docstring in public module
@@ -82,6 +84,7 @@ pep257:
     - D213
     # First word of the docstring should not be This
     - D404
+# !doc end of docstrings
     # Section name should end with a newline
     - D406
     # Missing dashed underline after section
