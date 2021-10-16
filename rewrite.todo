@@ -1,2 +1,15 @@
+Coding:
+    No Config File:
+        ☐ Handle if a bool is passed in as a default
+        needs to be lower case in the toml, need a check for this
+
+    Config File:
+        ☐ Handle if a bool is passed in as a default
+        needs to be lower case in the toml, need a check for this
+
+
 Documentation:
     ☐ Rewrite documentation using `mkdocs` and using `.md`. @2h
+
+
+Tests:
