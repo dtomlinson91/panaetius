@@ -26,7 +26,6 @@ if __name__ == "__main__":
     set_config(c, key="logging.path", default="some logging path")
     set_config(c, key="nonexistent.item", default="some nonexistent item")
     set_config(c, key="nonexistent.item")
-    # FIXME: this isn't working after the refactor...
     set_config(c, key="toml.points_config")
     set_config(c, key="float", default=2.0)
     set_config(c, key="float_str", default="2.0")

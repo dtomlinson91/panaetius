@@ -8,9 +8,10 @@ Coding:
         needs to be lower case in the toml, need a check for this
 
     Logging:
-        ☐ Create SimpleLogger, AdvancedLogger, CustomLogger classes
+        ✔ Create SimpleLogger, AdvancedLogger, CustomLogger classes @done(21-10-16 16:22)
         should simply have the different logging strings to output
         should both specify whether to save to file or not
+        ☐ Logging path should take by default the config path unless overwritten?
 
 Documentation:
     ☐ Rewrite documentation using `mkdocs` and using `.md`. @2h
