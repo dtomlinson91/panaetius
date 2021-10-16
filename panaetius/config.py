@@ -29,9 +29,8 @@ class Config:
             self._missing_config = True
             return {}
 
-    def get_value(
-        self, key: str, default: str, cast: Any = None, mask: bool = False
-    ) -> Any:
+    # TODO: fix the return error
+    def get_value(self, key: str, default: str | None, mask: bool) -> Any:
         env_key = f"{self.header_variable.upper()}_{key.upper().replace('.', '_')}"
 
         # look in the config file
@@ -52,29 +51,22 @@ class Config:
                     else:
                         section, name = key.lower().split(".")
                         value = self.config[self.header_variable][section][name]
+                return value
                 # TODO: set a custom error and move this to the end to tell user that incorrect key was given and couldn't be found
                 # try:
                 #     return cast(value) if cast else value
                 # except UnboundLocalError:
                 #     # pass if nothing was found
                 #     pass
-            except KeyError:
-                # key not found in config file
-                pass
-            except TypeError:
-                # key not found in config file
-                pass
-
-            # look for an environment variable
-            value = os.environ.get(env_key.replace("-", "_"), default)
-
-
-if __name__ == "__main__":
-    os.environ["PANAETIUS_PATH"] = "/usr/local"
-    c = Config("panaetius_test")
-    print(c.config)
-    c.get_value("path", "some path")
-    c.get_value("top", "str", list)
-    c.get_value("logging.path", "str", list)
-    c.get_value("nonexistent.item", "some default value")
-    pass
+            except (KeyError, TypeError):
+                value = os.environ.get(env_key.replace("-", "_"))
+                if value is None:
+                    return toml.loads(default) if default is not None else None
+                return toml.loads(value)
+        else:
+            # look for an environment variable, fallback to default
+            value = os.environ.get(env_key.replace("-", "_"))
+            if value is None:
+                return toml.loads(default) if default is not None else None
+            return toml.loads(value)
+        return default
