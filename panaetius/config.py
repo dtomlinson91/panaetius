@@ -39,10 +39,23 @@ class Config:
         # no config file, look for env vars
         return self._get_env_value(env_key, default, coerce)
 
-    def _get_config_value_key_split_once(self):
-        pass
+    def _get_config_value_key_split_once(self, key: str, mask: bool) -> Any:
+        if mask:
+            # TODO: write mask logic here
+            pass
+        else:
+            name = key.lower()
+            return self.config[self.header_variable][name]
 
-    def _get_config_value_key_split_twice(self):
+    def _get_config_value_key_split_twice(self, key: str, mask: bool) -> Any:
+        if mask:
+            # TODO: write mask logic here
+            pass
+        else:
+            section, name = key.lower().split(".")
+            return self.config[self.header_variable][section][name]
+
+    def _get_config_value_missing_key_value_is_none(self, default: Any):
         pass
 
     def _get_config_value(
@@ -51,19 +64,9 @@ class Config:
         try:
             # look under top header
             if len(key.split(".")) == 1:
-                if mask:
-                    # TODO: write mask logic here
-                    pass
-                else:
-                    name = key.lower()
-                    value = self.config[self.header_variable][name]
+                value = self._get_config_value_key_split_once(key, mask)
             elif len(key.split(".")) == 2:
-                if mask:
-                    # TODO: write mask logic here
-                    pass
-                else:
-                    section, name = key.lower().split(".")
-                    value = self.config[self.header_variable][section][name]
+                value = self._get_config_value_key_split_twice(key, mask)
             return value
 
         except (KeyError, TypeError):
