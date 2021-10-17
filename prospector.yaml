@@ -103,9 +103,9 @@ dodgy:
 
 bandit:
   run: true
-  options:
+  # options:
     # ignore assert warning
-    B101
+    # - B101
 
 mypy:
   run: true

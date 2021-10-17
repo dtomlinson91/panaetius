@@ -8,6 +8,7 @@ import sys
 
 from panaetius import Config
 from panaetius.library import set_config
+from panaetius.exceptions import LoggingDirectoryDoesNotExistException
 
 
 def set_logger(config_inst: Config, logging_format_inst: LoggingData) -> logging.Logger:
@@ -21,6 +22,9 @@ def set_logger(config_inst: Config, logging_format_inst: LoggingData) -> logging
             / config_inst.header_variable
             / f"{config_inst.header_variable}.log"
         ).expanduser()
+
+        if not logging_file.parents[0].exists():
+            raise LoggingDirectoryDoesNotExistException()
 
         if config_inst.logging_rotate_bytes == 0:
             set_config(config_inst, "logging.rotate_bytes", 512000)

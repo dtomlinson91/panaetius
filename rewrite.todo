@@ -14,8 +14,9 @@ Coding:
         ✔ Logging path should take by default the config path unless overwritten? @done(21-10-16 23:49)
 
     Errors:
-        ☐ Check logging path + config path are valid, if not raise error.
-            ☐ Add tests for these.
+        ✔ Check logging path + config path are valid, if not raise error. @done(21-10-18 00:04)
+            ✔ Add tests for these. @done(21-10-18 00:04)
+        ✔ Check for a key > 2 levels, raise custom error, write test @done(21-10-17 23:30)
 
     Linting:
         ☐ Check all functions and annotations.
@@ -23,21 +24,45 @@ Coding:
     Docstrings:
         ☐ Write the docstrings for public functions/methods.
 
+    Functionality:
+        ☐ When both a config file and a env var is found, use the env var.
+
 Documentation:
     ☐ Rewrite documentation using `mkdocs` and using `.md`. @2h
 
+Misc:
+    ☐ Use the python runner to build the docs & run the tests
+        ☐ document this in trilium
 
 Tests:
-    Config File:
-        ☐
-
-    Environment Variable:
-        ☐
+    Bugfixes:
+        ✔ If loading from a default, don't covert to TOML @done(21-10-17 20:33)
+        ✔ Env Vars should be given as python objects @done(21-10-17 20:33)
+            The string or node provided may only consist of the following Python literal structures: strings, bytes, numbers, tuples, lists, dicts, sets, booleans, and None.
+            use ast.literal_eval()
+            https://docs.python.org/3/library/ast.html#ast.literal_eval
 
     __init__:
-        ☐ Test default config path set to "~/.config"
-        ☐ Test config path is set when passed in
+        ✔ Test default config path set to "~/.config" @done(21-10-17 17:25)
+        ✔ Test config path is set when passed in @done(21-10-17 17:25)
 
     config property:
-        ☐ Check testing config file is returned as dict
-        ☐ Check _self.missing_config and empty dict is returned
+        ✔ Check testing config file is returned as dict @done(21-10-17 17:25)
+        ✔ Check _self.missing_config and empty dict is returned @done(21-10-17 17:25)
+
+    get_value:
+        config_file:
+            ✔ Arrays & tables loaded correctly from config file @done(21-10-17 20:34)
+            ✔ test when key length is 1 the value is returned @done(21-10-17 18:55)
+            ✔ test when key length is 2 the value is returned @done(21-10-17 18:55)
+            ✔ test when key not found and no env var default is loaded @done(21-10-17 19:01)
+                ✔ test bool's are properly converted @done(21-10-17 19:01)
+            ✔ test when key not found and env var is set value is loaded @done(21-10-17 20:43)
+
+        env_var:
+            ✔ check if env key is missing the default is read in @done(21-10-17 20:55)
+            ✔ check if env key is present the values are read in @done(21-10-17 22:24)
+                ✔ parametrise a test to read in values form env vars and they're set correctly @done(21-10-17 22:24)
+
+    library:
+        ✔ test set_config works @done(21-10-17 23:29)
