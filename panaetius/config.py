@@ -17,7 +17,11 @@ class Config:
             else pathlib.Path.home() / ".config"
         )
         self._missing_config = False
+
+        # default logging options
         self.logging_path: str | None = None
+        self.logging_rotate_bytes: int = 0
+        self.logging_backup_count: int = 0
 
     @property
     def config(self) -> dict[str, Any]:
@@ -82,7 +86,7 @@ class Config:
             return self.__load_default_value(default)
         return self.__load_value(value, coerce)
 
-    def __load_value(self, value: str, coerce: bool) -> Any:
+    def __load_value(self, value: str, coerce: bool) -> Any:  # noqa
         value = str(value).lower() if isinstance(value, bool) else value
         return (
             toml.loads(f"value = {value}")["value"]
@@ -90,7 +94,7 @@ class Config:
             else toml.loads(f'value = "{value}"')["value"]
         )
 
-    def __load_default_value(self, default: Any) -> Any:
+    def __load_default_value(self, default: Any) -> Any:  # noqa
         if isinstance(default, str):
             return toml.loads(f'value = "{default}"')["value"]
         # if default is bool convert to lower case toml syntax

@@ -11,10 +11,33 @@ Coding:
         ✔ Create SimpleLogger, AdvancedLogger, CustomLogger classes @done(21-10-16 16:22)
         should simply have the different logging strings to output
         should both specify whether to save to file or not
-        ☐ Logging path should take by default the config path unless overwritten?
+        ✔ Logging path should take by default the config path unless overwritten? @done(21-10-16 23:49)
+
+    Errors:
+        ☐ Check logging path + config path are valid, if not raise error.
+            ☐ Add tests for these.
+
+    Linting:
+        ☐ Check all functions and annotations.
+
+    Docstrings:
+        ☐ Write the docstrings for public functions/methods.
 
 Documentation:
     ☐ Rewrite documentation using `mkdocs` and using `.md`. @2h
 
 
 Tests:
+    Config File:
+        ☐
+
+    Environment Variable:
+        ☐
+
+    __init__:
+        ☐ Test default config path set to "~/.config"
+        ☐ Test config path is set when passed in
+
+    config property:
+        ☐ Check testing config file is returned as dict
+        ☐ Check _self.missing_config and empty dict is returned
