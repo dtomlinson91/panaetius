@@ -4,3 +4,6 @@ class KeyErrorTooDeepException(Exception):
 
 class LoggingDirectoryDoesNotExistException(Exception):
     pass
+
+class InvalidPythonException(Exception):
+    pass

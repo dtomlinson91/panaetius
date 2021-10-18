@@ -5,7 +5,7 @@ from uuid import uuid4
 import pytest
 
 import panaetius
-from panaetius.exceptions import KeyErrorTooDeepException
+from panaetius.exceptions import InvalidPythonException, KeyErrorTooDeepException
 
 # test config paths
 
@@ -44,7 +44,9 @@ def test_config_file_exists(header, shared_datadir):
     assert config._missing_config is False
 
 
-def test_config_file_contents_read_success(header, shared_datadir, testing_config_contents):
+def test_config_file_contents_read_success(
+    header, shared_datadir, testing_config_contents
+):
     # arrange
     config_path = str(shared_datadir / "without_logging")
 
@@ -102,6 +104,23 @@ def test_get_value_from_key(
     assert config_value == expected_value
 
 
+def test_get_value_environment_var_override(header, shared_datadir):
+    # arrange
+    os.environ[f"{header.upper()}_SOME_TOP_STRING"] = '"some_overridden_value"'
+    config_path = str(shared_datadir / "without_logging")
+    config = panaetius.Config(header, config_path)
+    panaetius.set_config(config, "some_top_string")
+
+    # act
+    config_value = getattr(config, "some_top_string")
+
+    # assert
+    assert config_value == "some_overridden_value"
+
+    # cleanup
+    del os.environ[f"{header.upper()}_SOME_TOP_STRING"]
+
+
 def test_key_level_too_deep(header, shared_datadir):
     # arrange
     config_path = str(shared_datadir / "without_logging")
@@ -151,6 +170,9 @@ def test_get_value_missing_key_from_env(header, shared_datadir):
     # assert
     assert value_from_key == "some missing key"
 
+    # cleanup
+    del os.environ[f"{header.upper()}_MISSING_KEY"]
+
 
 # test env vars
 
@@ -197,7 +219,9 @@ def test_missing_config_read_from_default(header, shared_datadir):
         ),
     ],
 )
-def test_missing_config_read_from_env_var(env_value, expected_value, header, shared_datadir):
+def test_missing_config_read_from_env_var(
+    env_value, expected_value, header, shared_datadir
+):
     # arrange
     config_path = str(shared_datadir / str(uuid4()))
     os.environ[f"{header.upper()}_MISSING_KEY_READ_FROM_ENV_VAR"] = env_value
@@ -208,3 +232,25 @@ def test_missing_config_read_from_env_var(env_value, expected_value, header, sha
 
     # assert
     assert getattr(config, "missing_key_read_from_env_var") == expected_value
+
+    # cleanup
+    del os.environ[f"{header.upper()}_MISSING_KEY_READ_FROM_ENV_VAR"]
+
+
+def test_missing_config_read_from_env_var_invalid_python(header):
+    # arrange
+    os.environ[f"{header.upper()}_INVALID_PYTHON"] = "a string without quotes"
+    config = panaetius.Config(header)
+
+    # act
+    with pytest.raises(InvalidPythonException) as invalid_python_exception:
+        panaetius.set_config(config, "invalid_python")
+
+    # assert
+    assert (
+        str(invalid_python_exception.value)
+        == "a string without quotes is not valid Python."
+    )
+
+    # cleanup
+    del os.environ[f"{header.upper()}_INVALID_PYTHON"]

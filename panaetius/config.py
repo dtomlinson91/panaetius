@@ -7,7 +7,7 @@ from typing import Any
 
 import toml
 
-from panaetius.exceptions import KeyErrorTooDeepException
+from panaetius.exceptions import KeyErrorTooDeepException, InvalidPythonException
 
 
 class Config:
@@ -57,6 +57,12 @@ class Config:
         try:
             # look under top header
             # REVIEW: could this be auto handled for a key of arbitrary length?
+
+            # check for env variable and have it take priority
+            value = os.environ.get(env_key.replace("-", "_"))
+            if value is not None:
+                return self.__get_config_value_env_var_override(value)
+
             if len(key.split(".")) > 2:
                 raise KeyErrorTooDeepException(
                     f"Your key of {key} can only be 2 levels deep maximum. "
@@ -69,10 +75,9 @@ class Config:
             raise KeyError()
 
         except (KeyError, TypeError):
-            value = os.environ.get(env_key.replace("-", "_"))
             if value is None:
                 return self.__get_config_value_missing_key_value_is_none(default)
-            # if env var, coerce value if flag is set, else return a TOML string
+            # if env var is present, load it
             return self.__get_config_value_missing_key_value_is_not_none(value)
 
     def __get_config_value_key_split_once(self, key: str) -> Any:
@@ -89,6 +94,9 @@ class Config:
     def __get_config_value_missing_key_value_is_not_none(self, value: str) -> Any:
         return self.__load_value(value)
 
+    def __get_config_value_env_var_override(self, value: str) -> Any:
+        return self.__load_value(value)
+
     def _get_env_value(self, env_key: str, default: Any) -> Any:  # noqa
         # look for an environment variable, fallback to default
         value = os.environ.get(env_key.replace("-", "_"))
@@ -97,7 +105,10 @@ class Config:
         return self.__load_value(value)
 
     def __load_value(self, value: str) -> Any:  # noqa
-        return ast.literal_eval(value)
+        try:
+            return ast.literal_eval(value)
+        except (ValueError, SyntaxError):
+            raise InvalidPythonException(f"{value} is not valid Python.")  # noqa
 
     def __load_default_value(self, default: Any) -> Any:  # noqa
         return default

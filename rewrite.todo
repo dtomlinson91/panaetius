@@ -25,13 +25,14 @@ Coding:
         ☐ Write the docstrings for public functions/methods.
 
     Functionality:
-        ☐ When both a config file and a env var is found, use the env var.
+        ✔ When both a config file and a env var is found, use the env var. @done(21-10-18 00:38)
 
 Documentation:
     ☐ Rewrite documentation using `mkdocs` and using `.md`. @2h
 
 Misc:
-    ☐ Use the python runner to build the docs & run the tests
+    ☐ Use the python runner to build the docs & run the tests (including coverage html)
+        coverage run -m pytest && coverage report && coverage html
         ☐ document this in trilium
 
 Tests:
@@ -63,6 +64,7 @@ Tests:
             ✔ check if env key is missing the default is read in @done(21-10-17 20:55)
             ✔ check if env key is present the values are read in @done(21-10-17 22:24)
                 ✔ parametrise a test to read in values form env vars and they're set correctly @done(21-10-17 22:24)
+            ✔ test that the env var is valid python @done(21-10-18 01:03)
 
     library:
         ✔ test set_config works @done(21-10-17 23:29)
