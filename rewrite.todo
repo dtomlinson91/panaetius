@@ -19,10 +19,10 @@ Coding:
         ✔ Check for a key > 2 levels, raise custom error, write test @done(21-10-17 23:30)
 
     Linting:
-        ☐ Check all functions and annotations.
+        ✔ Check all functions and annotations. @done(21-10-18 01:07)
 
     Docstrings:
-        ☐ Write the docstrings for public functions/methods.
+        ✔ Write the docstrings for public functions/methods. @done(21-10-18 02:29)
 
     Functionality:
         ✔ When both a config file and a env var is found, use the env var. @done(21-10-18 00:38)

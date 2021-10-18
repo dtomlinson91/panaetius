@@ -1,3 +1,5 @@
+"""Module to define a convenient logger instance with json formatted output."""
+
 from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod
@@ -12,6 +14,50 @@ from panaetius.exceptions import LoggingDirectoryDoesNotExistException
 
 
 def set_logger(config_inst: Config, logging_format_inst: LoggingData) -> logging.Logger:
+    """
+    Set and return a `logging.Logger` instance for quick logging.
+
+    `logging_format_inst` should be an instance of either SimpleLogger, AdvancedLogger,
+    or CustomLogger.
+
+    SimpleLogger and AdvancedLogger define a logging format and a logging level info.
+
+    CustomLogger defines a logging level info and should have a logging format passed
+    in.
+
+    Logging to a file is defined by a `logging.path` key set on `Config`. This path
+    should exist as it will not be created.
+
+    Args:
+        config_inst (Config): The instance of the `Config` class.
+        logging_format_inst (LoggingData): The instance of the `LoggingData` class.
+
+    Raises:
+        LoggingDirectoryDoesNotExistException: If the logging directory specified does
+            not exist.
+
+    Returns:
+        logging.Logger: An configured instance of `logging.Logger` ready to be used.
+
+    Example:
+
+        ```
+        logger = set_logger(CONFIG, SimpleLogger())
+
+        logger.info("some logging message")
+        ```
+
+        Would create a logging output of:
+
+        ```
+        {
+            "time": "2021-10-18 02:26:24,037",
+            "logging_level":"INFO",
+            "message": "some logging message"
+        }
+        ```
+
+    """
     logger = logging.getLogger(config_inst.header_variable)
     log_handler_sys = logging.StreamHandler(sys.stdout)
 

@@ -50,8 +50,8 @@ if __name__ == "__main__":
     set_config(c, key="embedded.noexistbool", default=False)
 
     # logger = set_logger(c, SimpleLogger())
-    logger = set_logger(c, AdvancedLogger(logging_level="DEBUG"))
-    logger.info("test logging message")
+    logger = set_logger(c, SimpleLogger(logging_level="DEBUG"))
+    logger.info("some logging message")
     logger.debug("debugging message")
-    for i in dir(c):
-        logger.debug(i + ": " + str(getattr(c, i)) + " - " + str(type(getattr(c, i))))
+    # for i in dir(c):
+    #     logger.debug(i + ": " + str(getattr(c, i)) + " - " + str(type(getattr(c, i))))

@@ -1,3 +1,10 @@
+"""
+Access variables from a config file or an environment variable.
+
+This module defines the `Config` class to interact and read variables from either a
+`config.toml` or an environment variable.
+"""
+
 from __future__ import annotations
 
 import ast
@@ -11,9 +18,21 @@ from panaetius.exceptions import KeyErrorTooDeepException, InvalidPythonExceptio
 
 
 class Config:
-    """docstring for Config()."""
+    """The configuration class to access variables."""
 
     def __init__(self, header_variable: str, config_path: str = "") -> None:
+        """
+        Create a Config object to set and access variables.
+
+        Args:
+            header_variable (str): Your header variable name.
+            config_path (str, optional): The path where the header directory is stored.
+                Defaults to `~/.config`.
+
+        Example:
+            A header of `data_analysis` with a config_path of `~/myapps` will define
+                a config file in `~/myapps/data_analysis/config.toml`.
+        """
         self.header_variable = header_variable
         self.config_path = (
             pathlib.Path(config_path)
@@ -29,6 +48,12 @@ class Config:
 
     @property
     def config(self) -> dict:
+        """
+        Return the contents of the config file. If missing returns an empty dictionary.
+
+        Returns:
+            dict: The contents of the `.toml` loaded as a python dictionary.
+        """
         config_file_location = self.config_path / self.header_variable / "config.toml"
         try:
             with open(config_file_location, "r", encoding="utf-8") as config_file:
@@ -37,6 +62,36 @@ class Config:
             return {}
 
     def get_value(self, key: str, default: Any) -> Any:
+        """
+        Get the value of a variable from the key name.
+
+        The key can either be one (`value`) or two (`data.value`) levels deep.
+
+        A key of (`value`) (with a header of `data_analysis`) would refer to a
+        `config.toml` of:
+
+        ```
+        [data_analysis]
+        value = "some value"
+        ```
+
+        or an environment variable of `DATA_ANALYSIS_VALUE="'some value'"`.
+
+        A key of (`data.value`) would refer to a `config.toml` of:
+        ```
+        [data_analysis.data]
+        value = "some value"
+        ```
+        or an environment variable of `DATA_ANALYSIS_DATA_VALUE="'some value'"`.
+
+        Args:
+            key (str): The key of the variable.
+            default (Any): The default value if the key cannot be found in the config
+                file, or an environment variable.
+
+        Returns:
+            Any: The value of the variable.
+        """
         env_key = f"{self.header_variable.upper()}_{key.upper().replace('.', '_')}"
 
         if not self._missing_config:

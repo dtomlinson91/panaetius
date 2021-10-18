@@ -12,9 +12,9 @@ pylint:
     # disables TODO warnings
     - fixme
 # !doc docstrings
-    - missing-module-docstring
-    - missing-class-docstring
-    - missing-function-docstring
+    # - missing-module-docstring
+    # - missing-class-docstring
+    # - missing-function-docstring
 # ! doc end of docstrings
     # disables warnings about abstract methods not overridden
     - abstract-method
@@ -67,23 +67,24 @@ pep257:
   disable:
 # !doc docstrings
     # Missing docstring in __init__
-    - D107
+    # - D107
     # Missing docstring in public module
-    - D100
+    # - D100
     # Missing docstring in public class
-    - D101
+    # - D101
     # Missing docstring in public method
-    - D102
+    # - D102
     # Missing docstring in public function
-    - D103
+    # - D103
+    # Multi-line docstring summary should start at the second line
+    # - D213
+    # First word of the docstring should not be This
+    # - D404
+    # DEFAULT IGNORES
     # 1 blank line required before class docstring
     - D203
     # Multi-line docstring summary should start at the first line
     - D212
-    # Multi-line docstring summary should start at the second line
-    - D213
-    # First word of the docstring should not be This
-    - D404
 # !doc end of docstrings
     # Section name should end with a newline
     - D406
