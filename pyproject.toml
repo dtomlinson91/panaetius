@@ -28,19 +28,12 @@ toml = "^0.10.0"
 pylite = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
-autopep8 = "^1.4"
-pudb = "^2019.2"
-McCabe = "^0.6.1"
-YAPF = "^0.29.0"
-pydocstyle = "^5.0"
-Pyflakes = "^2.1"
-Rope = "^0.16.0"
-python-language-server = "^0.31.4"
-pycodestyle = "^2.5"
-sphinx = "^2.3"
-sphinx_rtd_theme = "^0.4.3"
-prospector = "^1.3.0"
+prospector = {extras = ["with_bandit", "with_mypy"], version = "^1.5.1"}
+types-toml = "^0.10.1"
+pytest = "^6.2.5"
+pytest-datadir = "^1.3.1"
+pytest-xdist = "^2.4.0"
+coverage = "^6.0.2"
 
 [build-system]
 requires = ["poetry>=0.12"]
