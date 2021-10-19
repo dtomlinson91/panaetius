@@ -25,7 +25,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.7"
 toml = "^0.10.0"
-pylite = "^0.1.0"
+PyYAML = "^6.0"
 
 [tool.poetry.dev-dependencies]
 prospector = {extras = ["with_bandit", "with_mypy"], version = "^1.5.1"}

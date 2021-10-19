@@ -422,14 +422,6 @@ python-versions = "*"
 pylint = ">=1.7"
 
 [[package]]
-name = "pylite"
-version = "0.1.0"
-description = "Intract with sqlite3 in python as simple as it can be."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "pyparsing"
 version = "2.4.7"
 description = "Python parsing module"
@@ -504,7 +496,7 @@ testing = ["filelock"]
 name = "pyyaml"
 version = "6.0"
 description = "YAML parser and emitter for Python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -621,7 +613,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "468d1aa5e0c440262f6041ad859358a84ef32462941aa6f3ba71838a52cc1ced"
+content-hash = "f68e5ab35a155ce5ea567b670f93f4678b6c65d1335017b21431b315297a0410"
 
 [metadata.files]
 astroid = [
@@ -833,10 +825,6 @@ pylint-flask = [
 pylint-plugin-utils = [
     {file = "pylint-plugin-utils-0.6.tar.gz", hash = "sha256:57625dcca20140f43731311cd8fd879318bf45a8b0fd17020717a8781714a25a"},
     {file = "pylint_plugin_utils-0.6-py3-none-any.whl", hash = "sha256:2f30510e1c46edf268d3a195b2849bd98a1b9433229bb2ba63b8d776e1fc4d0a"},
-]
-pylite = [
-    {file = "pylite-0.1.0-py3-none-any.whl", hash = "sha256:eb46f5beb1f2102672fd4355c013ac2feebc0df284d65f7711f2041a0a410141"},
-    {file = "pylite-0.1.0.tar.gz", hash = "sha256:e338d20d3f8f72dd84d1e58f2fd6dba008d593e0cfacfb5fbdd5a297b830628e"},
 ]
 pyparsing = [
     {file = "pyparsing-2.4.7-py2.py3-none-any.whl", hash = "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"},

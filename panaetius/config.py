@@ -2,7 +2,7 @@
 Access variables from a config file or an environment variable.
 
 This module defines the `Config` class to interact and read variables from either a
-`config.toml` or an environment variable.
+`config.yml` or an environment variable.
 """
 
 from __future__ import annotations
@@ -12,7 +12,8 @@ import os
 import pathlib
 from typing import Any
 
-import toml
+# import toml
+import yaml
 
 from panaetius.exceptions import KeyErrorTooDeepException, InvalidPythonException
 
@@ -31,7 +32,7 @@ class Config:
 
         Example:
             A header of `data_analysis` with a config_path of `~/myapps` will define
-                a config file in `~/myapps/data_analysis/config.toml`.
+                a config file in `~/myapps/data_analysis/config.yml`.
         """
         self.header_variable = header_variable
         self.config_path = (
@@ -52,12 +53,13 @@ class Config:
         Return the contents of the config file. If missing returns an empty dictionary.
 
         Returns:
-            dict: The contents of the `.toml` loaded as a python dictionary.
+            dict: The contents of the `.yml` loaded as a python dictionary.
         """
-        config_file_location = self.config_path / self.header_variable / "config.toml"
+        config_file_location = self.config_path / self.header_variable / "config.yml"
         try:
             with open(config_file_location, "r", encoding="utf-8") as config_file:
-                return dict(toml.load(config_file))
+                # return dict(toml.load(config_file))
+                return dict(yaml.load(stream=config_file, Loader=yaml.SafeLoader))
         except FileNotFoundError:
             return {}
 
@@ -67,8 +69,8 @@ class Config:
 
         The key can either be one (`value`) or two (`data.value`) levels deep.
 
-        A key of (`value`) (with a header of `data_analysis`) would refer to a
-        `config.toml` of:
+        A key of `value` (with a header of `data_analysis`) would refer to a
+        `config.yml` of:
 
         ```
         [data_analysis]
@@ -77,7 +79,7 @@ class Config:
 
         or an environment variable of `DATA_ANALYSIS_VALUE="'some value'"`.
 
-        A key of (`data.value`) would refer to a `config.toml` of:
+        A key of `data.value` would refer to a `config.yml` of:
         ```
         [data_analysis.data]
         value = "some value"
@@ -101,7 +103,7 @@ class Config:
         return self._get_env_value(env_key, default)
 
     def _check_config_file_exists(self) -> bool:
-        config_file_location = self.config_path / self.header_variable / "config.toml"
+        config_file_location = self.config_path / self.header_variable / "config.yml"
         try:
             with open(config_file_location, "r", encoding="utf-8"):
                 return False
