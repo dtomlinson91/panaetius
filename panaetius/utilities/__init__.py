@@ -1,3 +1,3 @@
 """General utilities."""
 
-from panaetius.utilities import squasher
+from panaetius.utilities.squasher import Squash
