@@ -98,11 +98,11 @@ class LoggingData(metaclass=ABCMeta):
     @property
     @abstractmethod
     def format(self) -> str:
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def __init__(self, logging_level: str):
-        self.logging_level = logging_level
+        raise NotImplementedError
 
 
 class SimpleLogger(LoggingData):
