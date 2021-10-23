@@ -36,7 +36,7 @@ class Config:
         """
         self.header_variable = header_variable
         self.config_path = (
-            pathlib.Path(config_path)
+            pathlib.Path(config_path).expanduser()
             if config_path
             else pathlib.Path.home() / ".config"
         )
