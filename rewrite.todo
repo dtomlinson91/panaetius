@@ -1,16 +1,26 @@
+Testing:
+  To Write:
+    ☐ Test the Config file skipping header with `skip_header_init`
+    ☐ Document coverage commands
+      `coverage run --source=./panaetius -m pytest`
+      `coverage report` & `coverage html` > gives ./htmlcov/index.html
+    ☐ Document for abstract methods should raise NotImplementedError
+    ☐ Document https://stackoverflow.com/a/9212387
 Documentation:
     ☐ Rewrite documentation using `mkdocs` and using `.md`.
     ☐ Update the metadata in the `pyproject.toml`.
     ☐ Create a new `Readme.md` and remove the `.rst`.
+    ☐ Document the logging strategy
+      CLI tools should use `logger.critical` and raise SystemExit(1)
+      Libraries should raise custom errors and have a `logger.critical(exec_info=1)`
 
 Misc:
     ☐ Use the python runner to build the docs & run the tests (including coverage html)
         coverage run -m pytest && coverage report && coverage html
         ☐ document this in trilium
-    ☐ Bump the version to release 2.0
-
 
 Archive:
+  ✘ Bump the version to release 2.0 @cancelled(21-10-23 05:36) @project(Misc)
   ✔ Handle if a bool is passed in as a default @done(21-10-16 05:25) @project(Coding.No Config File)
   ✔ Handle if a bool is passed in as a default @done(21-10-16 05:25) @project(Coding.Config File)
   ✔ Create SimpleLogger, AdvancedLogger, CustomLogger classes @done(21-10-16 16:22) @project(Coding.Logging)
