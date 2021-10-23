@@ -15,7 +15,7 @@ from typing import Any
 # import toml
 import yaml
 
-from panaetius.exceptions import KeyErrorTooDeepException, InvalidPythonException
+from panaetius.exceptions import KeyErrorTooDeepException
 
 
 class Config:
@@ -184,7 +184,8 @@ class Config:
         try:
             return ast.literal_eval(value)
         except (ValueError, SyntaxError):
-            raise InvalidPythonException(f"{value} is not valid Python.")  # noqa
+            # string without spaces: ValueError, with spaces; SyntaxError
+            return value
 
     def __load_default_value(self, default: Any) -> Any:  # noqa
         return default
