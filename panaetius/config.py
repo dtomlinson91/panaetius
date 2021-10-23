@@ -40,7 +40,6 @@ class Config:
         Examples:
             `config_path` defaults to None on initialisation but will be set to `~/.config`.
 
-        Example:
             A header of `data_analysis` with a config_path of `~/myapps` will define
                 a config file in `~/myapps/data_analysis/config.yml`.
         """
