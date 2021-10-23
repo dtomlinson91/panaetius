@@ -21,6 +21,7 @@ def test_logging_directory_does_not_exist(header, shared_datadir):
     assert str(logging_exception.value) == ""
 
 
+# TODO: change this test so it asserts the dir exists
 def test_logging_directory_does_exist(header, shared_datadir):
     # arrange
     config = Config(header)
@@ -32,3 +33,5 @@ def test_logging_directory_does_exist(header, shared_datadir):
 
     # assert
     assert isinstance(logger, logging.Logger)
+
+# TODO: add tests to check that SimpleLogger, AdvancedLogger, CustomLogger work as intended

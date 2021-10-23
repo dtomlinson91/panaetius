@@ -29,6 +29,17 @@ def test_user_config_path_set(header, shared_datadir):
     assert str(config.config_path) == config_path
 
 
+def test_user_config_path_without_header_dir_set(header, shared_datadir):
+    # arrange
+    config_path = str(shared_datadir / "without_header")
+
+    # act
+    config = panaetius.Config(header, config_path, skip_header_init=True)
+
+    # assert
+    assert str(config.config_path) == config_path
+
+
 # test config files
 
 
@@ -38,6 +49,18 @@ def test_config_file_exists(header, shared_datadir):
 
     # act
     config = panaetius.Config(header, config_path)
+    _ = config.config
+
+    # assert
+    assert config._missing_config is False
+
+
+def test_config_file_without_header_dir_exists(header, shared_datadir):
+    # arrange
+    config_path = str(shared_datadir / "without_header")
+
+    # act
+    config = panaetius.Config(header, config_path, skip_header_init=True)
     _ = config.config
 
     # assert
@@ -106,7 +129,7 @@ def test_get_value_from_key(
 
 def test_get_value_environment_var_override(header, shared_datadir):
     # arrange
-    os.environ[f"{header.upper()}_SOME_TOP_STRING"] = '"some_overridden_value"'
+    os.environ[f"{header.upper()}_SOME_TOP_STRING"] = "some_overridden_value"
     config_path = str(shared_datadir / "without_logging")
     config = panaetius.Config(header, config_path)
     panaetius.set_config(config, "some_top_string")
@@ -158,7 +181,7 @@ def test_get_value_missing_key_from_default(header, shared_datadir):
 
 def test_get_value_missing_key_from_env(header, shared_datadir):
     # arrange
-    os.environ[f"{header.upper()}_MISSING_KEY"] = '"some missing key"'
+    os.environ[f"{header.upper()}_MISSING_KEY"] = "some missing key"
 
     config_path = str(shared_datadir / "without_logging")
     config = panaetius.Config(header, config_path)
@@ -205,7 +228,7 @@ def test_missing_config_read_from_default(header, shared_datadir):
 @pytest.mark.parametrize(
     "env_value,expected_value",
     [
-        ('"a missing string"', "a missing string"),
+        ("a missing string", "a missing string"),
         ("1", 1),
         ("1.0", 1.0),
         ("True", True),
@@ -237,6 +260,7 @@ def test_missing_config_read_from_env_var(
     del os.environ[f"{header.upper()}_MISSING_KEY_READ_FROM_ENV_VAR"]
 
 
+@pytest.mark.skip(reason="No longer needed as strings are loaded without quotes")
 def test_missing_config_read_from_env_var_invalid_python(header):
     # arrange
     os.environ[f"{header.upper()}_INVALID_PYTHON"] = "a string without quotes"
