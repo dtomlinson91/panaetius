@@ -21,14 +21,24 @@ from panaetius.exceptions import KeyErrorTooDeepException, InvalidPythonExceptio
 class Config:
     """The configuration class to access variables."""
 
-    def __init__(self, header_variable: str, config_path: str = "") -> None:
+    def __init__(
+        self,
+        header_variable: str,
+        config_path: str | None = None,
+        skip_header_init: bool = False,
+    ) -> None:
         """
         Create a Config object to set and access variables.
 
         Args:
             header_variable (str): Your header variable name.
             config_path (str, optional): The path where the header directory is stored.
-                Defaults to `~/.config`.
+                Defaults to None on initialisation.
+            skip_header_init (bool, optional): If True will not use a header
+                subdirectory in the `config_path`. Defaults to False.
+
+        Examples:
+            `config_path` defaults to None on initialisation but will be set to `~/.config`.
 
         Example:
             A header of `data_analysis` with a config_path of `~/myapps` will define
@@ -37,9 +47,10 @@ class Config:
         self.header_variable = header_variable
         self.config_path = (
             pathlib.Path(config_path).expanduser()
-            if config_path
+            if config_path is not None
             else pathlib.Path.home() / ".config"
         )
+        self.skip_header_init = skip_header_init
         self._missing_config = self._check_config_file_exists()
 
         # default logging options
@@ -55,7 +66,12 @@ class Config:
         Returns:
             dict: The contents of the `.yml` loaded as a python dictionary.
         """
-        config_file_location = self.config_path / self.header_variable / "config.yml"
+        if self.skip_header_init:
+            config_file_location = self.config_path / "config.yml"
+        else:
+            config_file_location = (
+                self.config_path / self.header_variable / "config.yml"
+            )
         try:
             with open(config_file_location, "r", encoding="utf-8") as config_file:
                 # return dict(toml.load(config_file))
@@ -103,7 +119,10 @@ class Config:
         return self._get_env_value(env_key, default)
 
     def _check_config_file_exists(self) -> bool:
-        config_file_location = self.config_path / self.header_variable / "config.yml"
+        if self.skip_header_init is False:
+            config_file_location = self.config_path / self.header_variable / "config.yml"
+        else:
+            config_file_location = self.config_path / "config.yml"
         try:
             with open(config_file_location, "r", encoding="utf-8"):
                 return False
