@@ -101,3 +101,75 @@ def build(ctx):
 
     # cleanup
     shutil.rmtree(extracted_path)
+
+
+@duty
+def export(ctx):
+    """
+    Export the dependencies to a requirements.txt file.
+
+    Example:
+        `duty export`
+    """
+    requirements_content = ctx.run(
+        [
+            "poetry",
+            "export",
+            "-f",
+            "requirements.txt",
+            "--without-hashes",
+        ]
+    )
+    requirements_dev_content = ctx.run(
+        [
+            "poetry",
+            "export",
+            "-f",
+            "requirements.txt",
+            "--without-hashes",
+            "--dev",
+        ]
+    )
+
+    requirements = pathlib.Path(".") / "requirements.txt"
+    requirements_dev = pathlib.Path(".") / "requirements_dev.txt"
+
+    with requirements.open("w", encoding="utf-8") as req:
+        req.write(requirements_content)
+
+    with requirements_dev.open("w", encoding="utf-8") as req:
+        req.write(requirements_dev_content)
+
+
+@duty
+def publish(ctx, password:str):
+    """
+    Publish the package to pypi.org.
+
+    Args:
+        password (str): pypi.org password.
+
+    Example:
+        `duty publish password=$my_password`
+    """
+    dist_dir = pathlib.Path(".") / "dist"
+    rm_result = rm_tree(dist_dir)
+    print(rm_result)
+
+    publish_result = ctx.run(["poetry", "publish", "-u", "dtomlinson", "-p", password, "--build"])
+    print(publish_result)
+
+
+def rm_tree(directory: pathlib.Path):
+    """
+    Recursively delete a directory and all its contents.
+
+    Args:
+        directory (pathlib.Path): The directory to delete.
+    """
+    for child in directory.glob('*'):
+        if child.is_file():
+            child.unlink()
+        else:
+            rm_tree(child)
+    directory.rmdir()

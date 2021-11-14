@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "panaetius"
-version = "2.3.1"
+version = "2.3.2"
 description = "Python module to gracefully handle a .config file/environment variables for scripts, with built in masking for sensitive options. Provides a Splunk friendly formatted logger instance."
 license = "MIT"
 authors = ["dtomlinson <dtomlinson@panaetius.co.uk>"]
-readme = "./README.rst"
+readme = "./README.md"
 homepage = "https://github.com/dtomlinson91/panaetius"
 repository = "https://github.com/dtomlinson91/panaetius"
 documentation = "https://panaetius.readthedocs.io/en/latest/introduction.html"
