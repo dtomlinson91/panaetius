@@ -1,5 +1,5 @@
 """
-Access variables from a config file or an environment variable.
+Config module to access variables from a config file or an environment variable.
 
 This module defines the `Config` class to interact and read variables from either a
 `config.yml` or an environment variable.
@@ -19,7 +19,16 @@ from panaetius.exceptions import KeyErrorTooDeepException
 
 
 class Config:
-    """The configuration class to access variables."""
+    """
+    A configuration class to access user variables.
+
+    Args:
+        header_variable (str): the `header` variable.
+        config_path (str|None=None): the path where the header directory is stored.
+        skip_header_init (bool=False): if True will not use a header subdirectory in the
+            `config_path`.
+
+    """
 
     def __init__(
         self,
@@ -60,10 +69,12 @@ class Config:
     @property
     def config(self) -> dict:
         """
-        Return the contents of the config file. If missing returns an empty dictionary.
+        Return the contents of the config file.
+
+        If no config file is specified then this returns an empty dictionary.
 
         Returns:
-            dict: The contents of the `.yml` loaded as a python dictionary.
+            dict: The contents of the config `.yml` loaded as a python dictionary.
         """
         if self.skip_header_init:
             config_file_location = self.config_path / "config.yml"

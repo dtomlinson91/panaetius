@@ -1,4 +1,4 @@
-"""Squash a json object or Python dictionary into a single level dictionary."""
+"""Sub-module that defines squashing json objects into a single json object."""
 
 from __future__ import annotations
 
