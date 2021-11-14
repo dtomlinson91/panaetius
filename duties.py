@@ -101,3 +101,41 @@ def build(ctx):
 
     # cleanup
     shutil.rmtree(extracted_path)
+
+
+@duty
+def export(ctx):
+    """
+    Export the dependencies to a requirements.txt file.
+
+    Example:
+        `duty export`
+    """
+    requirements_content = ctx.run(
+        [
+            "poetry",
+            "export",
+            "-f",
+            "requirements.txt",
+            "--without-hashes",
+        ]
+    )
+    requirements_dev_content = ctx.run(
+        [
+            "poetry",
+            "export",
+            "-f",
+            "requirements.txt",
+            "--without-hashes",
+            "--dev",
+        ]
+    )
+
+    requirements = pathlib.Path(".") / "requirements.txt"
+    requirements_dev = pathlib.Path(".") / "requirements_dev.txt"
+
+    with requirements.open("w", encoding="utf-8") as req:
+        req.write(requirements_content)
+
+    with requirements_dev.open("w", encoding="utf-8") as req:
+        req.write(requirements_dev_content)

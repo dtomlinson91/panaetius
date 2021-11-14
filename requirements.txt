@@ -1,7 +1,2 @@
-pylite==0.1.0 \
-    --hash=sha256:e338d20d3f8f72dd84d1e58f2fd6dba008d593e0cfacfb5fbdd5a297b830628e \
-    --hash=sha256:eb46f5beb1f2102672fd4355c013ac2feebc0df284d65f7711f2041a0a410141
-toml==0.10.0 \
-    --hash=sha256:229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c \
-    --hash=sha256:235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e \
-    --hash=sha256:f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3
+pyyaml==6.0; python_version >= "3.6"
+toml==0.10.2; (python_version >= "2.6" and python_full_version < "3.0.0") or (python_full_version >= "3.3.0")
