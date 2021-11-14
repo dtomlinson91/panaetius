@@ -63,11 +63,17 @@ def set_logger(config_inst: Config, logging_format_inst: LoggingData) -> logging
 
     # configure file handler
     if config_inst.logging_path is not None:
-        logging_file = (
-            pathlib.Path(config_inst.logging_path)
-            / config_inst.header_variable
-            / f"{config_inst.header_variable}.log"
-        ).expanduser()
+        if not config_inst.skip_header_init:
+            logging_file = (
+                pathlib.Path(config_inst.logging_path)
+                / config_inst.header_variable
+                / f"{config_inst.header_variable}.log"
+            ).expanduser()
+        else:
+            logging_file = (
+                pathlib.Path(config_inst.logging_path)
+                / f"{config_inst.header_variable}.log"
+            ).expanduser()
 
         if not logging_file.parents[0].exists():
             raise LoggingDirectoryDoesNotExistException()

@@ -1,13 +1,13 @@
-"""Exceptions for the module."""
+"""Module that defines custom exceptions for Panetius."""
 
 
 class KeyErrorTooDeepException(Exception):
-    pass
+    """Raised if the keys in the config.yml are nested too deeply."""
 
 
 class LoggingDirectoryDoesNotExistException(Exception):
-    pass
+    """Raised if the logging directory does not exist."""
 
 
 class InvalidPythonException(Exception):
-    pass
+    """Raised if the environement variable Python type is invalid."""

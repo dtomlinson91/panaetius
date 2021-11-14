@@ -1,5 +1,7 @@
 """
-panaetius - a utility library to read variables and provide convenient logging.
+Panaetius package.
+
+A utility library to read variables and provide convenient logging.
 
 Author: Daniel Tomlinson (dtomlinson@panaetius.co.uk)
 """
