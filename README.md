@@ -42,9 +42,9 @@ from panaetius.exceptions import LoggingDirectoryDoesNotExistException
 
 
 if (config_path := os.environ.get("TEMBO_CONFIG")) is not None:
-    CONFIG: Any = panaetius.Config("tembo", config_path, skip_header_init=True)  # type: ignore
+    CONFIG: Any = panaetius.Config("tembo", config_path, skip_header_init=True)
 else:
-    CONFIG: Any = panaetius.Config(  # type: ignore
+    CONFIG = panaetius.Config(
         "tembo", "~/tembo/.config", skip_header_init=True
     )
 
