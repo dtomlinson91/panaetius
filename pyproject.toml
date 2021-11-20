@@ -36,6 +36,9 @@ pytest-xdist = "^2.4.0"
 coverage = "^6.0.2"
 duty = "^0.7.0"
 types-PyYAML = "^6.0.1"
+isort = "^5.10.1"
+mypy = "^0.910"
+safety = "^1.10.3"
 
 [tool.black]
 line-length = 120
