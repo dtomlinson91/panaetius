@@ -4,20 +4,5 @@
     "python.linting.enabled": true,
     "python.pythonPath": ".venv/bin/python",
     "restructuredtext.confPath": "${workspaceFolder}/docs/source",
-    "peacock.color": "#307E6A",
-    "workbench.colorCustomizations": {
-        "editorGroup.border": "#3ea389",
-        "panel.border": "#3ea389",
-        "sash.hoverBorder": "#3ea389",
-        "sideBar.border": "#3ea389",
-        "statusBar.background": "#307e6a",
-        "statusBar.foreground": "#e7e7e7",
-        "statusBarItem.hoverBackground": "#3ea389",
-        "statusBarItem.remoteBackground": "#307e6a",
-        "statusBarItem.remoteForeground": "#e7e7e7",
-        "titleBar.activeBackground": "#307e6a",
-        "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.inactiveBackground": "#307e6a99",
-        "titleBar.inactiveForeground": "#e7e7e799"
-    }
+    "peacock.color": "#307E6A"
 }

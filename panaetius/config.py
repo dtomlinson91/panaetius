@@ -79,9 +79,7 @@ class Config:
         if self.skip_header_init:
             config_file_location = self.config_path / "config.yml"
         else:
-            config_file_location = (
-                self.config_path / self.header_variable / "config.yml"
-            )
+            config_file_location = self.config_path / self.header_variable / "config.yml"
         try:
             with open(config_file_location, "r", encoding="utf-8") as config_file:
                 # return dict(toml.load(config_file))
