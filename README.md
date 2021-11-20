@@ -32,16 +32,21 @@ See Tembo for an example: <https://github.com/tembo-pages/tembo-core/blob/main/t
 Example snippet to use in a module:
 
 ```python
+"""Subpackage that contains the CLI application."""
+
 import os
+from typing import Any
 
 import panaetius
 from panaetius.exceptions import LoggingDirectoryDoesNotExistException
 
 
 if (config_path := os.environ.get("TEMBO_CONFIG")) is not None:
-    CONFIG = panaetius.Config("tembo", config_path, skip_header_init=True)
+    CONFIG: Any = panaetius.Config("tembo", config_path, skip_header_init=True)  # type: ignore
 else:
-    CONFIG = panaetius.Config("tembo", "~/tembo/.config", skip_header_init=True)
+    CONFIG: Any = panaetius.Config(  # type: ignore
+        "tembo", "~/tembo/.config", skip_header_init=True
+    )
 
 
 panaetius.set_config(CONFIG, "base_path", "~/tembo")
