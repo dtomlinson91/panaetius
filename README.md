@@ -78,6 +78,23 @@ import tembo.cli
 tembo.cli.CONFIG
 ```
 
+### Script
+
+Create `./config/config.yml` in the same directory as the script.
+
+In the script initialise a `CONFIG` object:
+
+```python
+import pathlib
+
+import panaetius
+
+CONFIG = panaetius.Config(
+    "teenagers_scraper", str(pathlib.Path(__file__).parents[0] / ".config"), skip_header_init=True
+)
+```
+
+Set variables in the same way as the module above.
 
 ## Utility Functions
 
