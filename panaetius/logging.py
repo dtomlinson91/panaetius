@@ -106,6 +106,11 @@ class LoggingData(metaclass=ABCMeta):
     def format(self) -> str:
         raise NotImplementedError
 
+    @property
+    @abstractmethod
+    def logging_level(self) -> str:
+        raise NotImplementedError
+
     @abstractmethod
     def __init__(self, logging_level: str):
         raise NotImplementedError
@@ -119,8 +124,12 @@ class SimpleLogger(LoggingData):
             '"%(levelname)s",\n\t"message": "%(message)s"\n}',
         )
 
+    @property
+    def logging_level(self) -> str:
+        return self._logging_level
+
     def __init__(self, logging_level: str = "INFO"):
-        self.logging_level = logging_level
+        self._logging_level = logging_level
 
 
 class AdvancedLogger(LoggingData):
@@ -133,8 +142,12 @@ class AdvancedLogger(LoggingData):
             '"%(levelname)s",\n\t"message": "%(message)s"\n}',
         )
 
+    @property
+    def logging_level(self) -> str:
+        return self._logging_level
+
     def __init__(self, logging_level: str = "INFO"):
-        self.logging_level = logging_level
+        self._logging_level = logging_level
 
 
 class CustomLogger(LoggingData):
@@ -142,6 +155,10 @@ class CustomLogger(LoggingData):
     def format(self) -> str:
         return str(self._format)
 
+    @property
+    def logging_level(self) -> str:
+        return self._logging_level
+
     def __init__(self, logging_format: str, logging_level: str = "INFO"):
-        self.logging_level = logging_level
+        self._logging_level = logging_level
         self._format = logging_format
