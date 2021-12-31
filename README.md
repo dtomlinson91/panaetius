@@ -96,6 +96,22 @@ CONFIG = panaetius.Config(
 
 Set variables in the same way as the module above.
 
+#### quickstart logging
+
+```python
+import panaetius
+
+
+def get_logger():
+    logging_dir = pathlib.Path(__file__).parents[0] / "logs"
+    logging_dir.mkdir(parents=True, exist_ok=True)
+
+    CONFIG = panaetius.Config("training_data_into_gcp", skip_header_init=True)
+    panaetius.set_config(CONFIG, "logging.level", "DEBUG")
+    panaetius.set_config(CONFIG, "logging.path", logging_dir)
+    return panaetius.set_logger(CONFIG, panaetius.SimpleLogger(logging_level=CONFIG.logging_level))
+```
+
 ## Utility Functions
 
 ### Squasher
