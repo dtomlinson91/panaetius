@@ -7,13 +7,16 @@ import re
 import shutil
 import sys
 from io import StringIO
+from typing import List, Optional, Pattern
+from urllib.request import urlopen
 
 from duty import duty
 
 PACKAGE_NAME = "panaetius"
+REPO_URL = "https://github.com/dtomlinson91/panaetius"
 
 
-@duty
+@duty(post=["export"])
 def update_deps(ctx, dry: bool = False):
     """
     Update the dependencies using Poetry.
@@ -64,22 +67,23 @@ def coverage(ctx):
 
 
 @duty
-def version(ctx, bump: str = "patch"):
+def bump(ctx, version: str = "patch"):
     """
     Bump the version using Poetry and update _version.py.
 
+    This duty is ran as part of `duty release`.
+
     Args:
         ctx: The context instance (passed automatically).
-        bump (str, optional) = poetry version flag. Available options are:
-            patch, minor, major, prepatch, preminor, premajor, prerelease.
-            Defaults to patch.
+        version (str, optional) = poetry version flag. Available options are:
+            patch, minor, major. Defaults to patch.
 
     Example:
-        `duty version bump=major`
+        `duty bump version=major`
     """
 
     # bump with poetry
-    result = ctx.run(["poetry", "version", bump])
+    result = ctx.run(["poetry", "version", version])
     new_version = re.search(r"(?:.*)(?:\s)(\d+\.\d+\.\d+)$", result)
     print(new_version.group(0))
 
@@ -122,6 +126,26 @@ def build(ctx):
 
     # cleanup
     shutil.rmtree(extracted_path)
+
+
+@duty
+def release(ctx, version: str = "patch") -> None:
+    """
+    Prepare package for a new release.
+
+    Will run bump, build, export. Manual running of publish is required afterwards.
+
+    Args:
+        ctx: The context instance (passed automatically).
+        version (str): poetry version flag. Available options are: patch, minor, major.
+    """
+    print(ctx.run(["duty", "bump", f"version={version}"]))
+    ctx.run(["duty", "build"])
+    ctx.run(["duty", "export"])
+    print(
+        "✔ Check generated files. Run `duty changelog planned_release= previous_release=` and `duty publish password=`"
+        " when ready to publish."
+    )
 
 
 @duty
@@ -304,6 +328,38 @@ def check_dependencies(ctx):
         title="Checking dependencies",
         pty=True,
     )
+
+
+@duty
+def changelog(ctx, planned_release: Optional[str] = None, previous_release: Optional[str] = None):
+    """
+    Generate a changelog with git-cliff.
+
+    Args:
+        ctx: The context instance (passed automatically).
+        planned_release (str, optional): The planned release version. Example: v1.0.2
+        previous_release (str, optional): The previous release version. Example: v1.0.1
+    """
+    generated_changelog: str = ctx.run(["git", "cliff", "-u", "-t", planned_release, "-s", "header"])[:-1]
+    if previous_release is not None:
+        generated_changelog: list = generated_changelog.splitlines()
+        generated_changelog.insert(
+            1,
+            f"<small>[Compare with {previous_release}]({REPO_URL}/compare/{previous_release}..{planned_release})</small>",
+        )
+        generated_changelog: str = "\n".join([line for line in generated_changelog]) + "\n"
+    new_changelog = []
+
+    changelog_file = pathlib.Path(".") / "CHANGELOG.md"
+    with changelog_file.open("r", encoding="utf-8") as changelog_contents:
+        all_lines = changelog_contents.readlines()
+        for line_string in all_lines:
+            regex_string = re.search(r"(<!-- marker -->)", line_string)
+            new_changelog.append(line_string)
+            if isinstance(regex_string, re.Match):
+                new_changelog.append(generated_changelog)
+    with changelog_file.open("w", encoding="utf-8") as changelog_contents:
+        changelog_contents.writelines(new_changelog)
 
 
 def rm_tree(directory: pathlib.Path):
