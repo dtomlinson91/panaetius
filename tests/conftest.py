@@ -18,6 +18,9 @@ def testing_config_contents():
                 "some_second_list": ["some", "second", "value"],
                 "some_second_table": {"first": ["some", "first", "value"]},
                 "some_second_table_bools": {"bool": [True, False]},
+                "third": {
+                    "some_third_string": "some_third_value",
+                },
             },
         }
     }

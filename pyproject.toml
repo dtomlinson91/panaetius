@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "panaetius"
-version = "2.3.3"
+version = "2.3.4"
 description = "Python module to gracefully handle a .config file/environment variables for scripts, with built in masking for sensitive options. Provides a Splunk friendly formatted logger instance."
 license = "MIT"
 authors = ["dtomlinson <dtomlinson@panaetius.co.uk>"]

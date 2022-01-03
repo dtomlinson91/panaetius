@@ -67,9 +67,7 @@ def test_config_file_without_header_dir_exists(header, shared_datadir):
     assert config._missing_config is False
 
 
-def test_config_file_contents_read_success(
-    header, shared_datadir, testing_config_contents
-):
+def test_config_file_contents_read_success(header, shared_datadir, testing_config_contents):
     # arrange
     config_path = str(shared_datadir / "without_logging")
 
@@ -101,11 +99,10 @@ def test_config_file_contents_read_success(
             "second_some_second_table_bools",
             {"bool": [True, False]},
         ),
+        ("second.third.some_third_string", "second_third_some_third_string", "some_third_value"),
     ],
 )
-def test_get_value_from_key(
-    set_config_key, get_config_key, expected_value, header, shared_datadir
-):
+def test_get_value_from_key(set_config_key, get_config_key, expected_value, header, shared_datadir):
     """
     Test the following:
 
@@ -155,11 +152,7 @@ def test_key_level_too_deep(header, shared_datadir):
         panaetius.set_config(config, key)
 
     # assert
-    assert (
-        str(key_error_too_deep.value)
-        == f"Your key of {key} can only be 2 levels deep maximum. "
-        f"You have 4"
-    )
+    assert str(key_error_too_deep.value) == f"Your key of {key} can only be 3 levels deep maximum."
 
 
 def test_get_value_missing_key_from_default(header, shared_datadir):
@@ -242,9 +235,7 @@ def test_missing_config_read_from_default(header, shared_datadir):
         ),
     ],
 )
-def test_missing_config_read_from_env_var(
-    env_value, expected_value, header, shared_datadir
-):
+def test_missing_config_read_from_env_var(env_value, expected_value, header, shared_datadir):
     # arrange
     config_path = str(shared_datadir / str(uuid4()))
     os.environ[f"{header.upper()}_MISSING_KEY_READ_FROM_ENV_VAR"] = env_value
@@ -271,10 +262,7 @@ def test_missing_config_read_from_env_var_invalid_python(header):
         panaetius.set_config(config, "invalid_python")
 
     # assert
-    assert (
-        str(invalid_python_exception.value)
-        == "a string without quotes is not valid Python."
-    )
+    assert str(invalid_python_exception.value) == "a string without quotes is not valid Python."
 
     # cleanup
     del os.environ[f"{header.upper()}_INVALID_PYTHON"]
