@@ -147,15 +147,16 @@ class Config:
             if value is not None:
                 return self.__get_config_value_env_var_override(value)
 
-            if len(key.split(".")) > 2:
+            if len(key.split(".")) > 3:
                 raise KeyErrorTooDeepException(
-                    f"Your key of {key} can only be 2 levels deep maximum. "
-                    f"You have {len(key.split('.'))}"
+                    f"Your key of {key} can only be 3 levels deep maximum."
                 )
             if len(key.split(".")) == 1:
                 return self.__get_config_value_key_split_once(key)
             if len(key.split(".")) == 2:
                 return self.__get_config_value_key_split_twice(key)
+            if len(key.split(".")) == 3:
+                return self.__get_config_value_key_split_thrice(key)
             raise KeyError()
 
         except (KeyError, TypeError):
@@ -171,6 +172,10 @@ class Config:
     def __get_config_value_key_split_twice(self, key: str) -> Any:
         section, name = key.lower().split(".")
         return self.config[self.header_variable][section][name]
+
+    def __get_config_value_key_split_thrice(self, key: str) -> Any:
+        section, name_0, name_1 = key.lower().split(".")
+        return self.config[self.header_variable][section][name_0][name_1]
 
     def __get_config_value_missing_key_value_is_none(self, default: Any) -> Any:
         return self.__load_default_value(default)
