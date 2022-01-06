@@ -1,8 +1,0 @@
-{
-    "python.linting.pylintEnabled": false,
-    "python.linting.prospectorEnabled": true,
-    "python.linting.enabled": true,
-    "python.pythonPath": ".venv/bin/python",
-    "restructuredtext.confPath": "${workspaceFolder}/docs/source",
-    "peacock.color": "#307E6A"
-}
