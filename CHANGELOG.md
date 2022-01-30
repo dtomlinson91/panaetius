@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 <!-- marker -->
+## [v2.3.5](https://github.com/dtomlinson91/panaetius/commits/v2.3.5) - 2022-01-30
+<small>[Compare with v2.3.4](https://github.com/dtomlinson91/panaetius/compare/v2.3.4...v2.3.5)</small>
+
+### 🧱 Build
+
+- Relax PyYAML version constraint for better compatibility ([a0583b5](https://github.com/dtomlinson91/panaetius/commit/a0583b5f0aa3068139827ff46f8a7aa16cd6b424))
 ## [v2.3.4](https://github.com/dtomlinson91/panaetius/commits/v2.3.4) - 2022-01-03
 <small>[Compare with 2.3.3](https://github.com/dtomlinson91/panaetius/compare/2.3.3...v2.3.4)</small>
 
