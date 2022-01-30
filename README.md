@@ -1,5 +1,8 @@
 # Panaetius
 
+![PyPI](https://img.shields.io/pypi/v/panaetius)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/panaetius)
+
 This package provides:
 
 - Functionality to read user variables from a `config.yml` or environment variables.
