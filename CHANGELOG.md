@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 <!-- marker -->
 ## [v2.3.4](https://github.com/dtomlinson91/panaetius/commits/v2.3.4) - 2022-01-03
-<small>[Compare with 2.3.3](https://github.com/dtomlinson91/panaetius/compare/2.3.3..v2.3.4)</small>
+<small>[Compare with 2.3.3](https://github.com/dtomlinson91/panaetius/compare/2.3.3...v2.3.4)</small>
 
 ### ✨ Features
 
