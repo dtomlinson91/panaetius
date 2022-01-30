@@ -345,7 +345,7 @@ def changelog(ctx, planned_release: Optional[str] = None, previous_release: Opti
         generated_changelog: list = generated_changelog.splitlines()
         generated_changelog.insert(
             1,
-            f"<small>[Compare with {previous_release}]({REPO_URL}/compare/{previous_release}..{planned_release})</small>",
+            f"<small>[Compare with {previous_release}]({REPO_URL}/compare/{previous_release}...{planned_release})</small>",
         )
         generated_changelog: str = "\n".join([line for line in generated_changelog]) + "\n"
     new_changelog = []

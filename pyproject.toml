@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "panaetius"
-version = "2.3.4"
+version = "2.3.5"
 description = "Python module to gracefully handle a .config file/environment variables for scripts, with built in masking for sensitive options. Provides a Splunk friendly formatted logger instance."
 license = "MIT"
 authors = ["dtomlinson <dtomlinson@panaetius.co.uk>"]
@@ -24,18 +24,16 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.7"
-toml = "^0.10.0"
-PyYAML = "^6.0"
+PyYAML = "*"
 
 [tool.poetry.dev-dependencies]
 prospector = {extras = ["with_bandit", "with_mypy"], version = "^1.5.1"}
-types-toml = "^0.10.1"
 pytest = "^6.2.5"
 pytest-datadir = "^1.3.1"
 pytest-xdist = "^2.4.0"
 coverage = "^6.0.2"
 duty = "^0.7.0"
-types-PyYAML = "^6.0.1"
+types-PyYAML = "*"
 isort = "^5.10.1"
 mypy = "^0.910"
 safety = "^1.10.3"
