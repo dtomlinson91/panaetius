@@ -83,6 +83,8 @@ tembo.cli.CONFIG
 
 ### Script
 
+#### with config file
+
 Create `./config/config.yml` in the same directory as the script.
 
 In the script initialise a `CONFIG` object:
@@ -98,6 +100,16 @@ CONFIG = panaetius.Config(
 ```
 
 Set variables in the same way as the module above.
+
+####  with env vars only
+
+```python
+import panaetius
+
+CONFIG = panaetius.Config("mart")
+panaetius.set_config(CONFIG, "username")
+panaetius.set_config(CONFIG, "password")
+```
 
 #### quickstart logging
 
