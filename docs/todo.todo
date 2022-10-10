@@ -1,0 +1,16 @@
+Features:
+    ☐ Add simple one-line logger
+    ☐ Try Typer
+        <https://typer.tiangolo.com/>
+
+
+One-line logger
+```
+LOGGER = panaetius.set_logger(
+    CONFIG,
+    panaetius.CustomLogger(
+        logging_format='{"time": "%(asctime)s", "logging_level":"%(levelname)s", "message": "%(message)s"}',
+        logging_level=CONFIG.logging_level,
+    ),
+)
+```
